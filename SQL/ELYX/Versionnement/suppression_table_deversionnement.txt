@@ -1,0 +1,16 @@
+-- Supprimer la table
+drop table dpmdat.a_raccord;
+
+-- Si erreur parce que versionnée, alors déversionner
+EXEC DBMS_WM.DisableVersioning('dpmdat.a_raccord', force => true, ignore_last_error => true);
+
+-- Si erreur parce que état DDL en cours, alors rollback DDL, puis relancer la commande de déversionnement
+EXEC DBMS_WM.RollbackDDL('DPMDAT.A_RACCORD');
+
+
+
+
+
+
+
+

@@ -1,0 +1,5 @@
+
+gdalbuildvrt -resolution lowest  C:\temp_mosa\MNT_10m.vrt H:\GEODATA\EXTERNE-PSUD\GEORASTER\MNT\DTSI-10m_Psud\*.tif
+
+
+

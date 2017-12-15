@@ -1,0 +1,11 @@
+
+set PATH=%PATH%;C:/php
+set DATA_DIR="C:\Users\Yogis\Documents\Projets\UICN fonge\Données\Données de Charente\txt"
+
+set SCRIPT_FILE="C:\Users\Yogis\Documents\Projets\UICN fonge\Script\export_fonge_txt_hugo.php"
+
+
+cd "C:\Users\Yogis\Documents\Projets\UICN fonge\Script\workdir"
+dir /b %DATA_DIR%\*.txt>"lot_a_traiter.txt"
+
+for /f %a IN (lot_a_traiter.txt) do php %SCRIPT_FILE% %DATA_DIR%\ %a

@@ -1,0 +1,10 @@
+
+gdalbuildvrt -resolution lowest  C:\DEM_NC_SRTM.vrt A:\EN_travaux\DEM_NASA\NC\*.hgt
+
+
+
+gdalwarp -s_srs EPSG:4326 -t_srs EPSG:3163 -of GTIff -co "COMPRESS=LZW" -co "TFW=YES" -srcnodata -32768 c:\DEM_NC_SRTM.vrt ombrageNC_SRTM.tif
+
+
+gdaldem hillshade C:\relief_cal\GTOPO-world\SRTM_GTOPO_u30_mosaic.tif Hillshade_world.tif
+

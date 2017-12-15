@@ -1,0 +1,5 @@
+
+-- select TABLE_NAME from WMSYS.WM$VERSIONED_TABLES where OWNER='NomDuSchémaData';
+
+
+select TABLE_NAME from WMSYS.WM$VERSIONED_TABLES where OWNER='DPMDAT';

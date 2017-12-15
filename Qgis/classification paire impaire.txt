@@ -1,0 +1,2 @@
+CASE WHEN "bande 1" % 2 = 0 then '0'ELSE '1' END
+

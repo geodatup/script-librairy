@@ -1,0 +1,7 @@
+gdal_translate -of Gtiff -co "COMPRESS=LZW" -co "TFW=YES" -co "BIGTIFF=YES" C:\Mosa_DITTT_SERAIL_PSUD_5dm.vrt Y:\Images\Images_sources\MosaiquePSUD2.tif
+gdal_translate -of ECW -co "LARGE_OK=YES" Y:\Images\Images_sources\MosaiquePSUD2.tif mosaique_PSUD2.ecw
+
+gdal_translate -of Gtiff -co "COMPRESS=LZW" -co "TFW=YES" -co "BIGTIFF=YES" -a_srs EPSG:3163  H:\GEODATA\EXTERNE-PSUD\GEORASTER\MNT\mnt10lambert_tif\mnt10lambert_3_2.tif H:\GEODATA\EXTERNE-PSUD\GEORASTER\MNT\DTSI-10m_Psud\mnt10lambert_3_2.tif
+
+gdal_translate -of Gtiff -co "COMPRESS=LZW" -co "TFW=YES" -co "BIGTIFF=YES" ombrage_10m.tif ombrage_10m_lzw.tif
+

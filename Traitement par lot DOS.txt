@@ -1,0 +1,11 @@
+Traitement par lot
+
+remplace [dir] par le chemin d'accès aux fichiers
+[gdal cmd] par la commande gdal (sans les chemin d'accès au fichier ni  où écrire le résultat)
+[dir_result] : par ex c:\temp_mosa\2000\heterogen_band_rep\
+
+
+dir /b [dir]\*.tif>"Fichier.txt"
+set DATA_DIR=[dir]
+for /f %a IN (Fichier.txt) do [gdal cmd] %DATA_DIR%\%a [dir_result]%a
+

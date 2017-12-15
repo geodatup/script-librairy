@@ -1,0 +1,9 @@
+delete from psuddat.parcelle_ar_aux;
+delete from psuddat.parcelle_ar_lt;
+delete from psuddat.parcelle_aux;
+delete from psuddat.parcelle_lt;
+
+select count (*) from psuddat.parcelle_ar_aux;
+select count (*) from psuddat.parcelle_ar_lt;
+select count (*) from psuddat.parcelle_aux;
+select count (*) from psuddat.parcelle_lt;

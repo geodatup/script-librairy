@@ -1,0 +1,1 @@
+gdalinfo C:\temp_mosa\Z3-AB\Mosa_DITTT-Z3B_5dm.vrt

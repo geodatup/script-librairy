@@ -1,0 +1,32 @@
+gdalbuildvrt -resolution lowest  -srcnodata "255 255 255" C:\temp_mosa\Z3-AB\Mosa_DITTT-Z3A_5dm.vrt H:\GEODATA\INTERNE-PSUD\GEORASTER\PSUD\Ortho-photos\lafoa_2007\*.tif
+gdalbuildvrt -resolution lowest  -srcnodata "255 255 255" C:\temp_mosa\Z3-AB\Mosa_DITTT-Z3B_5dm.vrt H:\GEODATA\INTERNE-PSUD\GEORASTER\PSUD\Ortho-photos\Moindou_2008\*.tif
+
+
+gdalbuildvrt -resolution lowest -allow_projection_difference C:\temp_mosa\1-Mosa_Z3-5dm.vrt C:\temp_mosa\Z3-AB\*.vrt
+gdalbuildvrt -resolution lowest  -srcnodata "255 255 255" temp_mosa\2-Mosa_DITTT-Z1_5dm.vrt H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2007_5dm_lzw\*.tif
+gdalbuildvrt -resolution lowest  -srcnodata "255 255 255" temp_mosa\3-Mosa_DITTT-Z2_5dm.vrt H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2008_5dm_lzw\*.tif
+
+
+gdalbuildvrt -resolution lowest  C:\temp_mosa\4-Mosa_SERAIL-5dm.vrt H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\SERAIL\Mosaique_Serail\*.tif
+
+
+gdalbuildvrt -resolution lowest -allow_projection_difference C:\Mosa_DITTT_SERAIL_PSUD_5dm.vrt C:\temp_mosa\*.vrt
+
+-----------------
+gdalbuildvrt -resolution lowest  -srcnodata "255 255 255" temp_mosa\1A_Z1_5dm.vrt H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2007_5dm_lzw\1A\*.tif
+gdal_translate -of ECW -co "LARGE_OK=YES" temp_mosa\1A_Z1_5dm.vrt 1A_Z1.ecw
+gdalbuildvrt -resolution lowest  -srcnodata "255 255 255" temp_mosa\1B_Z1_5dm.vrt H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2007_5dm_lzw\1B\*.tif
+gdal_translate -of ECW -co "LARGE_OK=YES" temp_mosa\1B_Z1_5dm.vrt 1B_Z1.ecw
+gdalbuildvrt -resolution lowest  -srcnodata "255 255 255" temp_mosa\2_Z1_5dm.vrt H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2007_5dm_lzw\2\*.tif
+gdal_translate -of ECW -co "LARGE_OK=YES" temp_mosa\2_Z1_5dm.vrt 2_Z1.ecw
+gdalbuildvrt -resolution lowest  -srcnodata "255 255 255" temp_mosa\3_Z1_5dm.vrt H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2007_5dm_lzw\3\*.tif
+gdal_translate -of ECW -co "LARGE_OK=YES" temp_mosa\3_Z1_5dm.vrt 3_Z1.ecw
+
+gdalbuildvrt -resolution lowest  -srcnodata "255 255 255" temp_mosa\1_Z2_5dm.vrt H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2008_5dm_lzw\1\*.tif
+gdal_translate -of ECW -co "LARGE_OK=YES" temp_mosa\1_Z2_5dm.vrt 1_Z2.ecw
+gdalbuildvrt -resolution lowest  -srcnodata "255 255 255" temp_mosa\2B_Z2_5dm.vrt H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2008_5dm_lzw\2B\*.tif
+gdal_translate -of ECW -co "LARGE_OK=YES" temp_mosa\2B_Z2_5dm.vrt 2B_Z2.ecw
+gdalbuildvrt -resolution lowest  -srcnodata "255 255 255" temp_mosa\2A_Z2_5dm.vrt H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2008_5dm_lzw\2A\*.tif
+gdal_translate -of ECW -co "LARGE_OK=YES" temp_mosa\2A_Z2_5dm.vrt 2A_Z2.ecw
+gdalbuildvrt -resolution lowest  -srcnodata "255 255 255" temp_mosa\3_Z2_5dm.vrt H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2008_5dm_lzw\3\*.tif
+gdal_translate -of ECW -co "LARGE_OK=YES" temp_mosa\3_Z2_5dm.vrt 3_Z2.ecw

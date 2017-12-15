@@ -1,0 +1,8 @@
+<OGRVRTDataSource>
+    <OGRVRTLayer name="Etablissements">
+        <SrcDataSource SEPARATOR="SEMICOLON">M:\VECTEURS\PSUD\Enseignement\Etablissements.csv</SrcDataSource>
+        <GeometryType>wkbPoint</GeometryType>
+        <LayerSRS>EPSG:3163</LayerSRS>
+        <GeometryField encoding="WKT" field="Localisation"/>
+    </OGRVRTLayer>
+</OGRVRTDataSource>

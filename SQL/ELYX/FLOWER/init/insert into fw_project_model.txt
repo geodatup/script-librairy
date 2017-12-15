@@ -1,0 +1,2 @@
+INSERT INTO FLOWER.FW_PROJECT_MODEL 
+VALUES (6, 'MODPROJ1', 'FLOWER', to_date('2011/07/07', 'yyyy/mm/dd'), 'FLOWER', to_date('2011/07/07', 'yyyy/mm/dd'), 'DPM', 'SIGADM', 'COMMUNE', 'NOM', null)

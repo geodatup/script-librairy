@@ -1,0 +1,4 @@
+ogr2ogr -f “CSV” “D:\demo\data\ead_wkt.csv" "PG:host=portos user=osm dbname=osm password=osm" -sql ”SELECT * FROM FicheTheme” -lco “GEOMETRY=AS_WKT ” -lco “LINEFORMAT=CRLF” -lco “SEPARATOR=SEMICOLON”
+
+
+ogr2ogr -f “CSV” “D:\demo\data\ead_wkt.csv" "M:\VECTEURS\BSIG\e-admin\integration\EAD_CMS"  -lco “GEOMETRY=AS_WKT ” -lco “LINEFORMAT=CRLF” -lco “SEPARATOR=SEMICOLON”

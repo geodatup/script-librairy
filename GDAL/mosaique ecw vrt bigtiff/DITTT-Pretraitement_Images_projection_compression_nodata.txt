@@ -1,0 +1,7 @@
+
+
+dir /b H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2007_5dm_lzw_old\*.tif>"Zone1_2007.txt"
+set DATA_DIR=H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2007_5dm_lzw_old
+for /f %a IN (Zone1_2007.txt) do gdal_translate -of GTiff -a_srs EPSG:3163 -a_nodata "255 255 255" -mo SOURCE=DITTT_2007_Zone1 -co "COMPRESS=LZW" -co "TFW=YES" %DATA_DIR%\%a H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2007_5dm_lzw\%a
+
+

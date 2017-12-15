@@ -1,0 +1,19 @@
+--Mosaique mixte PSUD-dittt-SERAIL
+
+gdal_translate -of ECW -co "LARGE_OK=YES" Mosa_DITTT_SERAIL_PSUD_5dm.vrt Mosa_DITTT_SERAIL_PSUD_5dm.ecw
+
+--SHOM
+
+gdal_translate -of ECW -co "LARGE_OK=YES" Shom_GE.vrt Shom_GE.ecw
+
+
+--Carto
+
+gdal_translate -of ECW -co "LARGE_OK=YES" Carto_10.vrt Carto_10.ecw
+gdal_translate -of ECW -co "LARGE_OK=YES" Carto_50.vrt Carto_50.ecw
+gdal_translate -of ECW -co "LARGE_OK=YES" Carto_100.vrt Carto_100.ecw
+
+
+gdal_translate -of ECW -co "LARGE_OK=YES" C:\temp_mosa\Carto_100.vrt Carto_100.ecw
+gdal_translate -of ECW -co "LARGE_OK=YES" C:\temp_mosa\RasterCarto12_10.vrt A:\RASTERS\RASTER_CARTO\RasterCarto12_10.ecw
+gdal_translate -of ECW -co "LARGE_OK=YES" C:\temp_mosa\RasterCarto12_50.vrt A:\RASTERS\RASTER_CARTO\RasterCarto12_50.ecw

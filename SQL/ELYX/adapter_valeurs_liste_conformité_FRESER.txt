@@ -1,0 +1,4 @@
+update dpmdat.freser set type='RMAR' where type='RESERVE MARINE';
+update dpmdat.freser set type='RTERR' where type='RESERVE TERRESTRE';
+update dpmdat.freser set type='PFOREST' where type='PERIMETRE FORESTIER';
+update dpmdat.freser set type='PPE' where type='PERIMETRE DE PROTECTION DES EAUX';

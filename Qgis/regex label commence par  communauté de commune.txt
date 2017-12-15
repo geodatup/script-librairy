@@ -1,0 +1,31 @@
+ CASE WHEN  strpos( "nom_epci" , 'Communauté d''Agglomération du') = 0
+ THEN
+ regexp_replace(  "nom_epci" , 'Communauté d''Agglomération du', '')
+ WHEN  strpos( "nom_epci" , 'Communauté de communes') = 0
+ THEN
+ regexp_replace(  "nom_epci" , 'Communauté de communes', '')
+
+ WHEN strpos( "nom_epci" , 'CC des') = 0
+ THEN
+ regexp_replace(  "nom_epci" , 'CC des', '')
+ WHEN  strpos( "nom_epci" , 'CC de') = 0
+ THEN
+ regexp_replace(  "nom_epci" , 'CC de', '')
+ WHEN  strpos( "nom_epci" , 'CC du') = 0
+ THEN
+ regexp_replace(  "nom_epci" , 'CC du', '')
+ WHEN strpos( "nom_epci" , 'CC ') = 0
+ THEN
+ regexp_replace(  "nom_epci" , 'CC ', '')
+ WHEN strpos( "nom_epci" , 'CA de') = 0
+ THEN
+ regexp_replace(  "nom_epci" , 'CA de', '')
+ WHEN strpos( "nom_epci" , 'CA du') = 0
+ THEN
+ regexp_replace(  "nom_epci" , 'CA du', '')
+  WHEN strpos( "nom_epci" , 'CA') = 0
+ THEN
+ regexp_replace(  "nom_epci" , 'CA', '')
+ ELSE
+  "nom_epci"
+ END

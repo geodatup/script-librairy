@@ -1,0 +1,1 @@
+select distinct nom, talias from apicd_base_composant, apicd_attribut where apicd_base_composant.numero_composant = apicd_attribut.numero_composant;

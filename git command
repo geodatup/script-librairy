@@ -1,0 +1,15 @@
+
+###DEPUIS POSTE DEV
+git add -A .
+git commit -m "auto comment"
+git push origin master
+
+yougis
+mcot9a9.u
+
+
+###DEPUIS POSTE QUALIF - Pythonanywhere (myvenv)
+cd /QuOrEl
+git pull
+
+python manage.py migrate

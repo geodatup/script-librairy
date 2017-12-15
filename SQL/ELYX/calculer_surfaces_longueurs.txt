@@ -1,0 +1,6 @@
+
+-- Calcul et stockage des superficies de l'ensemble des objets de la classe d'objet PARCELLE
+create table dpmdat.parcelle_area as select IDENTSTF, SDO_GEOM.SDO_AREA(geometry, 0.0005) AREA from dpmdat.parcelle;
+
+-- Calcul et stockage des longueurs de l'ensemble des objets de la classe d'objet FPROJ
+create table dpmdat.fproj_area as select IDENTSTF, SDO_GEOM.SDO_LENGTH(geometry, 0.0005) LENGTH from dpmdat.fproj;

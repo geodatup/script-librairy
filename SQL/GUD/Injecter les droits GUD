@@ -1,0 +1,9 @@
+Injecter les droits GUD
+Injecter les droits CARTOSUD_DDR à toute la DDR
+
+insert into gud_groupe_user(user_id, groupe_id)
+select id, '8a8186a83a72fe1a013b171eb6a80105' from gud_user where org_path like 'DDR%' and actif=1 and id not in (select user_id from gud_groupe_user where groupe_id='8a8186a83a72fe1a013b171eb6a80105')
+
+Injecter les droits SIGR à toute la DEPS
+insert into gud_groupe_user(user_id, groupe_id)
+select id, '8a8186a844b506410144b8d83ff7068d' from gud_user where org_path like 'DEPS%' and actif=1 and id not in (select user_id from gud_groupe_user where groupe_id='8a8186a844b506410144b8d83ff7068d')

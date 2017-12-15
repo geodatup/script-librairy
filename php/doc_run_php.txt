@@ -1,0 +1,4 @@
+SET PATH=%PATH%;c:/php
+Go to script and data dir by cd c:/directorypath/
+php path/to/script
+

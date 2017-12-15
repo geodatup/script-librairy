@@ -1,0 +1,25 @@
+<GDAL_WMtS>
+    <Service name="TMS">
+<ServerUrl>https://wxs.ign.fr/o492zx51daqyxktyaj308f00/geoportail/wmts?SERVICE=WMTS&REQUEST=GetCapabilities.xml</ServerUrl>
+    </Service>
+    <Format>image/png</Format>
+    <InfoFormat>application/xml</InfoFormat>
+    <DataWindow>
+        <UpperLeftX>-20037508.34</UpperLeftX>
+        <UpperLeftY>20037508.34</UpperLeftY>
+        <LowerRightX>20037508.34</LowerRightX>
+        <LowerRightY>-20037508.34</LowerRightY>
+        <TileLevel>18</TileLevel>
+        <TileCountX>1</TileCountX>
+        <TileCountY>1</TileCountY>
+        <YOrigin>top</YOrigin>
+    </DataWindow>
+    <UserPwd>hugoroussaffa:mcot9a9u</UserPwd>
+    <Projection>EPSG:3857</Projection>
+    <UnsafeSSL>true</UnsafeSSL>
+    <ZeroBlockHttpCodes>204,404</ZeroBlockHttpCodes>
+    <ZeroBlockOnServerException>true</ZeroBlockOnServerException>
+</GDAL_WMS>
+
+
+

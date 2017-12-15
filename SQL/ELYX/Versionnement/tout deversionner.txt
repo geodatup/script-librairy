@@ -1,0 +1,10 @@
+
+-- Déversionner toutes les tables ELYX d'un schéma
+
+Utiliser UltraEdit, cliquer sur Remplacer, cocher Expressions régulières
+
+Entrer la chaine suivante dans Rechercher :
+%^(?+^)
+
+Entrer la chaine suivante dans Remplacer :
+EXEC DBMS_WM.DisableVersioning('DPMDAT.^1');^pEXEC DBMS_WM.DisableVersioning('DPMDAT.^1_AR');

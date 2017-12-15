@@ -1,0 +1,17 @@
+# verifier les geometry
+
+SELECT ST_IsValid(geom) As good_obj from public.temp;
+
+# verifier le sys coordonnée
+SELECT ST_SRID(geom) from public.temp where id=1;
+
+# verifier le type de geometrie
+SELECT GeometryType(geom) from public.temp where id=1;
+
+
+
+SELECT UpdateGeometrySRID('lilopc_2po_4pgr_nodes','geom',4326);
+SELECT UpdateGeometrySRID('temp','geom',4326);
+
+
+SELECT Populate_Geometry_Columns('public.temp'::regclass);

@@ -1,0 +1,40 @@
+Ouvrir une console.
+Exécutez 
+cd c:/
+c:\mapserver\SDKShell.bat
+
+
+H:/GEODATA/EXTERNE-PSUD/GEORASTER/ortho-photo/DITTT/Zone2_2008_50/33-31-III.tif
+
+
+Reprojection
+
+gdalwarp -t_srs EPSG:3163 H:/GEODATA/INTERNE-PSUD/GEORASTER/PSUD/Ortho-photos/2011_1m/342-294.tif reproj.tif
+
+
+
+Mosaique 50cm
+
+gdalbuildvrt -resolution lowest -allow_projection_difference -srcnodata "255 255 255" Mosa_DITTT-SERAIL-PSUD_5dm.vrt H:/GEODATA/EXTERNE-PSUD/GEORASTER/ortho-photo/DITTT/Zone1_2007/*.tif H:/GEODATA/INTERNE-PSUD/GEORASTER/PSUD/Ortho-photos/2008_50cm/*.tif H:/GEODATA/EXTERNE-PSUD/GEORASTER/ortho-photo/DITTT/2008_5dm_lzw/*.tif H:/GEODATA/EXTERNE-PSUD/GEORASTER/ortho-photo/SERAIL/2008_25cm/*.tif H:/GEODATA/EXTERNE-PSUD/GEORASTER/ortho-photo/SERAIL/2008_50cm/*.tif H:/GEODATA/EXTERNE-PSUD/GEORASTER/ortho-photo/SERAIL/2009_50cm/*.tif H:/GEODATA/EXTERNE-PSUD/GEORASTER/ortho-photo/SERAIL/2009_25cm/*.tif H:/GEODATA/INTERNE-PSUD/GEORASTER/PSUD/Ortho-photos/2010_50cm/*.tif H:/GEODATA/EXTERNE-PSUD/GEORASTER/ortho-photo/SERAIL/2010_50cm/*.tif H:/GEODATA/INTERNE-PSUD/GEORASTER/PSUD/Ortho-photos/2011_50cm/*.tif
+
+
+Mosaique 1m
+
+gdalbuildvrt -srcnodata "255 255 255" -vrtnodata "0 255" 09-10.vrt H:/GEODATA/EXTERNE-PSUD/GEORASTER/ortho-photo/DITTT/Z1-Z2-Z-3-1m/*.tif H:/GEODATA/INTERNE-PSUD/GEORASTER/PSUD/Ortho-photos/2008_1m/*.tif H:/GEODATA/INTERNE-PSUD/GEORASTER/PSUD/Ortho-photos/2008_1m/*.tif H:/GEODATA/INTERNE-PSUD/GEORASTER/PSUD/Ortho-photos/2009_1m/*.tif H:/GEODATA/INTERNE-PSUD/GEORASTER/PSUD/Ortho-photos/2010_1m/*.tif H:/GEODATA/INTERNE-PSUD/GEORASTER/PSUD/Ortho-photos/2011_1m/*.tif
+
+
+Traduction 1 fichier
+
+gdal_translate -of GTiff Mosa_PSUD_2009_5dm.vrt PSUD2009.tif
+
+
+gdal_translate -of ECW -co "LARGE_OK=YES" Mosa_DITTT-SERAIL-PSUD_5dm.vrt PSUD2009.ecw
+
+
+Convertion LZW
+Boucle traitement plusieurs fichiers (copie du même nom)
+
+dir /b Y:\Images\Images_sources\Moindou_Bourail_2007\*.tif >moindou_2008.txt
+set DATA_DIR=Y:\Images\Images_sources\Moindou_Bourail_2007\
+for /f %a IN (moindou_2008.txt) do gdal_translate -of GTiff -co "COMPRESS=LZW" -co "TFW=YES" "%DATA_DIR%\%a" "H:\GEODATA\INTERNE-PSUD\GEORASTER\PSUD\Ortho-photos\moidou_2008\%a"
+

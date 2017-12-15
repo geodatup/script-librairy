@@ -1,0 +1,4 @@
+dev$ sudo gpsbabel -i garmin -f ttyUSB0
+sudo gpsbabel -w -i garmin -f ttyUSB0 -o gpx -F garmin_wpt.gpx
+sudo gpsbabel -t -i garmin -f ttyUSB0 -o gpx -F garmin_tracks.gpx
+sudo gpsbabel -r -i garmin -f ttyUSB0 -o gpx -F garmin_way.gpx

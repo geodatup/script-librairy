@@ -1,0 +1,23 @@
+
+
+dir /b H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2007_5dm_lzw\1A\*.tif>"Z1_1A_tif.txt"
+set DATA_DIR=H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2007_5dm_lzw\1A
+for /f %a IN (Z1_1A_tif.txt) do gdalbuildvrt -resolution lowest  -srcnodata "255 255 255"  controle_convert_vrt\%a.vrt %DATA_DIR%\%a
+
+set DATA_DIR=controle_convert_vrt
+for /f %a IN (Z1_1A_vrt.txt) do gdal_translate -of ECW -co "LARGE_OK=YES" %DATA_DIR%\%a controle_convert_ecw\%a.ecw
+
+
+dir /b H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2008_5dm_lzw\2A\*.tif>"Z2_2A_tif.txt"
+set DATA_DIR=H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2008_5dm_lzw\2A
+for /f %a IN (Z2_2A_tif.txt) do gdalbuildvrt -resolution lowest  -srcnodata "255 255 255" controle_convert_vrt_2A\%a.vrt %DATA_DIR%\%a
+
+set DATA_DIR=controle_convert_vrt_2A
+for /f %a IN (Z2_2A_vrt.txt) do gdal_translate -of ECW -co "LARGE_OK=YES" %DATA_DIR%\%a controle_convert_ecw_2A\%a.ecw
+
+dir /b H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2008_5dm_lzw\2B\*.tif>"Z2_2B_tif.txt"
+set DATA_DIR=H:\GEODATA\EXTERNE-PSUD\GEORASTER\ortho-photo\DITTT\2008_5dm_lzw\2B
+for /f %a IN (Z2_2B_tif.txt) do gdalbuildvrt -resolution lowest  -srcnodata "255 255 255" controle_convert_vrt_2B\%a.vrt %DATA_DIR%\%a
+
+set DATA_DIR=controle_convert_vrt_2B
+for /f %a IN (Z2_2B_vrt.txt) do gdal_translate -of ECW -co "LARGE_OK=YES" %DATA_DIR%\%a controle_convert_ecw_2B\%a.ecw

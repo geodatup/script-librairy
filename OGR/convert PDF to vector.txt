@@ -1,0 +1,127 @@
+# listes les layers contenu par l'ensemble des PDF et ecrits dans un fichier texte
+set DATA_DIR=D:\gisdata\010_basemaps\pdfEVG
+dir /b %DATA_DIR%\*.pdf>"Fichier.txt"
+for /f %a IN (Fichier.txt) do python  C:\Users\yogis\Documents\FFI\script\Python\gdalinfolayers.py %DATA_DIR%\%a >> infopdf.txt
+
+# retire les layers en double
+python  C:\Users\yogis\Documents\FFI\script\Python\rmDuplicateLine.py infopdf.txt allLayersNoDpl.txt
+
+# trie les layers pour plus de lisibilite
+sort allLayersNoDpl.txt > layers.txt
+
+
+# convertir PDF en TIF
+# extraire les layers annotations et les points cotes et les buildings 
+# extraire uniquement landuse en TIFF 
+set DATA_DIR=D:\gisdata\010_basemaps\pdfEVG
+dir /b %DATA_DIR%\*.pdf>"Fichier.txt"
+for /f %a IN (Fichier.txt) do (
+gdal_translate -of GTiff --config GDAL_PDF_DPI 300 -co COMPRESS=LZW -co "TFW=YES" %DATA_DIR%\%a %DATA_DIR%\product\TIFF\%a.tiff
+gdal_translate -of GTiff --config GDAL_PDF_DPI 300 -co COMPRESS=LZW -co "TFW=YES" --config GDAL_PDF_LAYERS "Map_Interior.Image" -a_nodata "255 255 255"  %DATA_DIR%\%a %DATA_DIR%\landuse_raster\%a.tiff
+gdal_translate -of GTiff --config GDAL_PDF_DPI 300 -co COMPRESS=LZW -co "TFW=YES" --config GDAL_PDF_LAYERS "Map_Interior.Blue_Anno","Map_Interior.Black_Anno","Map_Interior.ElevationP","Map_Interior.BuildingP" -a_nodata "255 255 255" %DATA_DIR%\%a %DATA_DIR%\product\annotation\%a.tiff
+)
+
+#  reproject TIF (geotransform issue ne permet pasde faire une mosaique virtuel)
+set DATA_DIR=D:\gisdata\010_basemaps\pdfEVG\product\TIFF
+dir /b %DATA_DIR%\*.tiff>"Fichier_tiff.txt"
+for /f %a IN (Fichier_tiff.txt) do gdalwarp -of GTiff -co tiled=yes  -co COMPRESS=LZW -co "TFW=YES" -dstnodata 255 %DATA_DIR%\%a %DATA_DIR%\wrap\%a
+
+gdalbuildvrt %DATA_DIR%\wrap\all.vrt %DATA_DIR%\wrap\*.tiff
+gdal_translate -of Gtiff -co "COMPRESS=LZW" -co "TFW=YES" -co "BIGTIFF=YES"  %DATA_DIR%\wrap\all.vrt %DATA_DIR%\bigtiff\pdf.tiff
+
+
+#  reproject TIF (geotransform issue ne permet pasde faire une mosaique virtuel)
+set DATA_DIR=D:\gisdata\010_basemaps\pdfEVG\product\annotation
+dir /b %DATA_DIR%\*.tiff>"Fichier_anno.txt"
+for /f %a IN (Fichier_anno.txt) do gdalwarp -of GTiff -co tiled=yes  -co COMPRESS=LZW -co "TFW=YES" -dstnodata 255 %DATA_DIR%\%a %DATA_DIR%\wrap\%a
+
+gdalbuildvrt %DATA_DIR%\wrap\all.vrt %DATA_DIR%\wrap\*.tiff
+gdal_translate -of Gtiff -co "COMPRESS=LZW" -co "TFW=YES" -co "BIGTIFF=YES"  %DATA_DIR%\wrap\all.vrt %DATA_DIR%\bigtiff\annotation.tiff
+
+
+
+#  reproject TIF (geotransform issue ne permet pas de faire une mosaique virtuel)
+set DATA_DIR=D:\gisdata\010_basemaps\pdfEVG\product\landuse_raster
+dir /b %DATA_DIR%\*.tiff>"Fichier_landuse.txt"
+for /f %a IN (Fichier_landuse.txt) do gdalwarp -of GTiff -co tiled=yes  -co COMPRESS=LZW -co "TFW=YES" -dstnodata 255 %DATA_DIR%\%a %DATA_DIR%\wrap\%a
+
+
+gdalbuildvrt %DATA_DIR%\wrap\all.vrt %DATA_DIR%\wrap\*.tiff
+gdal_translate -of Gtiff -co "COMPRESS=LZW" -co "TFW=YES" -co "BIGTIFF=YES"  %DATA_DIR%\wrap\all.vrt %DATA_DIR%\bigtiff\landuse.tiff
+
+
+
+# extraire les layers du PDF dans une base sqlite ET ajout du nom du pdf dans un attribut REF pour les tables listees dans layers.txt
+set DATA_OUT_DIR=D:\gisdata\010_basemaps\pdfEVG\product\sqlite
+set DATA_IN_DIR=D:\gisdata\010_basemaps\pdfEVG
+dir /b %DATA_IN_DIR%\*.pdf>"Fichier.txt"
+for /f %a IN (Fichier.txt) do (
+ogr2ogr -f sqlite %DATA_OUT_DIR%\%a.sqlite %DATA_IN_DIR%\%a
+for /f %b IN (c:\layers.txt) do (
+ogrinfo %DATA_OUT_DIR%\%a.sqlite -sql "ALTER TABLE %b ADD COLUMN ref string(10)"
+ogrinfo %DATA_OUT_DIR%\%a.sqlite -dialect SQLite -sql "UPDATE %b SET ref = '%a'"
+)
+)
+
+
+# Creer une couche d'union virtuelle pour chaque Layers de chaque base sqlite. 
+# la liste doit se faire dans le fichier c:\layersL.txt et c:\layersA.txt
+# traduit les unions virtuelles en layers shapefile polygon et linestring
+# le script python ogr2vrt a ete adapte pour supprimer les balises ouvrante et fermante afin de faire ne couche virtuelle Union
+cd c:\
+set DATA_OUT_DIR=D:\gisdata\010_basemaps\pdfEVG\product\virtuals
+set DATA_IN_DIR=D:\gisdata\010_basemaps\pdfEVG\product\sqlite
+set PYTHON_SCRIPT_DIR=C:\Users\yogis\Documents\FFI\script\Python
+dir /b %DATA_IN_DIR%\*.sqlite>"Fichier.txt"
+for /f %b IN (c:\layersL.txt) do (
+mkdir %DATA_OUT_DIR%\%b
+cd c:\
+for /f %a IN (Fichier.txt) do (
+python %PYTHON_SCRIPT_DIR%\ogr2unionvrt.py %DATA_IN_DIR%\%a %DATA_OUT_DIR%\%b\%a.txt %b
+)
+@echo ^<OGRVRTDataSource^>^<OGRVRTUnionLayer name="Union_%b"^> > %DATA_OUT_DIR%\%b.vrt
+type %DATA_OUT_DIR%\%b\*.txt >> %DATA_OUT_DIR%\%b.vrt
+@echo ^</OGRVRTUnionLayer^>^</OGRVRTDataSource^> >> %DATA_OUT_DIR%\%b.vrt
+rd %DATA_OUT_DIR%\%b /S /Q
+ogr2ogr -f "ESRI Shapefile" -skipfailures -nlt LINESTRING -overwrite %DATA_OUT_DIR%\..\shapefiles\%b.shp %DATA_OUT_DIR%\%b.vrt
+cd c:\
+)
+for /f %b IN (c:\layersA_old.txt) do (
+mkdir %DATA_OUT_DIR%\%b
+cd c:\
+for /f %a IN (Fichier.txt) do (
+python %PYTHON_SCRIPT_DIR%\ogr2unionvrt.py %DATA_IN_DIR%\%a %DATA_OUT_DIR%\%b\%a.txt %b
+)
+@echo ^<OGRVRTDataSource^>^<OGRVRTUnionLayer name="Union_%b"^> > %DATA_OUT_DIR%\%b.vrt
+type %DATA_OUT_DIR%\%b\*.txt >> %DATA_OUT_DIR%\%b.vrt
+@echo ^</OGRVRTUnionLayer^>^</OGRVRTDataSource^> >> %DATA_OUT_DIR%\%b.vrt
+rd %DATA_OUT_DIR%\%b /S /Q
+ogr2ogr -f "ESRI Shapefile" -skipfailures -nlt POLYGON -overwrite %DATA_OUT_DIR%\..\shapefiles\%b.shp %DATA_OUT_DIR%\%b.vrt
+cd c:\
+)
+for /f %b IN (c:\layersP.txt) do (
+mkdir %DATA_OUT_DIR%\%b
+cd c:\
+for /f %a IN (Fichier.txt) do (
+python %PYTHON_SCRIPT_DIR%\ogr2unionvrt.py %DATA_IN_DIR%\%a %DATA_OUT_DIR%\%b\%a.txt %b
+)
+@echo ^<OGRVRTDataSource^>^<OGRVRTUnionLayer name="Union_%b"^> > %DATA_OUT_DIR%\%b.vrt
+type %DATA_OUT_DIR%\%b\*.txt >> %DATA_OUT_DIR%\%b.vrt
+@echo ^</OGRVRTUnionLayer^>^</OGRVRTDataSource^> >> %DATA_OUT_DIR%\%b.vrt
+rd %DATA_OUT_DIR%\%b /S /Q
+ogr2ogr -f "ESRI Shapefile" -skipfailures -nlt POINT -overwrite %DATA_OUT_DIR%\..\shapefiles\%b.shp %DATA_OUT_DIR%\%b.vrt
+cd c:\
+)
+
+
+
+gdalwarp -crop_to_cutline -cl NEATLINE D:\gisdata\010_basemaps\pdfEVG\40401.pdf test.tiff
+
+ NEATLINE=POLYGON ((798914.8624153937 1775721.1335355751,799438.24799195561 1720925.0574051854,799729.43184796767 1686536.7149574768,799955.48855155602 1663121.1650504135,799966.31559958984 1660063.9207706915,791057.93004171469 1659934.0481974415,744630.68200269504 1659383.3754486439,723870.93985368509 1659196.2613202764,703392.32905205002 1658995.1549597839,684616.00499214092 1658825.9180065887,662864.26070838107 1658662.9149648461,649591.61425457569 1658576.3367162638,641194.86288987112 1658533.7064537914,625343.6305182639 1658440.4127519336,625255.9293342866 1677477.7750204476,625125.79018844827 1701257.7649380108,624952.26044241723 1733581.3927175808,624758.52247106773 1773705.2010420673,640923.20373317506 1773867.4245898623,660806.93856218492 1774046.6429869174,711714.43437823397 1774522.0145216014,766653.9876391337 1775132.8852143325,798900.55198601866 1775473.1121817001,798914.8624153937 1775721.1335355751,798914.8624153937 1775721.1335355751,798914.8624153937 1775721.1335355751,798914.8624153937 1775721.1335355751,798914.8624153937 1775721.1335355751,798914.8624153937 1775721.1335355751,798914.8624153937 1775721.1335355751,798914.8624153937 1775721.1335355751))
+
+
+
+
+ogrinfo -ro -where "FID=1168" D:\gisdata\010_basemaps\pdfEVG\product\shapefiles\Map_Interior_Boundary_ADM3.shp Map_Interior_Boundary_ADM3
+
+

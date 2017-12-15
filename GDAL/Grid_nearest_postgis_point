@@ -1,0 +1,5 @@
+
+
+
+gdal_grid -ot Int16 -of Gtiff -co "COMPRESS=LZW" -co "TFW=YES" -co "BIGTIFF=YES" -zfield cost -l temp  -a nearest:radius1=0.0:radius2=0.0:angle=0.0:nodata=0.0  PG:"dbname='osmdb' host='192.168.2.130' port='5432' user='postgres' password='mcot9a9.u'" C:/Users/Yogis/Documents/GIS_DataBase/WorkDir/accessibilite_plateau_kmean.tif
+

@@ -1,0 +1,1 @@
+ogr2ogr -f "ESRI Shapefile" M:\EN_travaux\AMP\seche_croissant.shp M:\scripts\OGR\VRT\csvWKT_POLYGON.vrt

@@ -1,0 +1,35 @@
+drop table "AGB"."CS_CONTOUR_EXPLOITATION" cascade constraints PURGE;
+drop table "AGB"."CS_PARCELLES" cascade constraints PURGE;
+drop table "AGB"."CS_ABREUVOIRS" cascade constraints PURGE;
+drop table "AGB"."CS_BARRIERES" cascade constraints PURGE;
+drop table "AGB"."CS_BATIMENTS" cascade constraints PURGE;
+drop table "AGB"."CS_CONDUITES" cascade constraints PURGE;
+drop table "AGB"."CS_CUVES" cascade constraints PURGE;
+drop table "AGB"."CS_PRISES_D_EAU" cascade constraints PURGE;
+drop table "AGB"."CS_RETENUES" cascade constraints PURGE;
+
+
+ogr2ogr -f OCI OCI:agb/agb@qualif1 -lco launder=yes -progress "M:\VECTEURS\PSUD\Agriculture\Moisson\conversion_pour_integration\Moisson-20140428\Parcelles_MoissonG.tab" -nln CS_PARCELLES
+ogr2ogr -f OCI OCI:agb/agb@qualif1 -lco launder=yes -progress "M:\VECTEURS\PSUD\Agriculture\Moisson\conversion_pour_integration\Moisson-20140428\Contour_Exploitations_MoissonG.tab" -nln CS_CONTOUR_EXPLOITATION
+ogr2ogr -f OCI OCI:agb/agb@qualif1 -lco launder=yes -progress "M:\VECTEURS\PSUD\Agriculture\Moisson\conversion_pour_integration\Moisson-20140428\Abreuvoirs_MoissonG.tab" -nln CS_ABREUVOIRS
+ogr2ogr -f OCI OCI:agb/agb@qualif1 -lco launder=yes -progress "M:\VECTEURS\PSUD\Agriculture\Moisson\conversion_pour_integration\Moisson-20140428\Barrières_MoissonG.tab" -nln CS_BARRIERES
+ogr2ogr -f OCI OCI:agb/agb@qualif1 -lco launder=yes -progress "M:\VECTEURS\PSUD\Agriculture\Moisson\conversion_pour_integration\Moisson-20140428\Bâtiments_MoissonG.tab" -nln CS_BATIMENTS
+ogr2ogr -f OCI OCI:agb/agb@qualif1 -lco launder=yes -progress "M:\VECTEURS\PSUD\Agriculture\Moisson\conversion_pour_integration\Moisson-20140428\Conduites_MoissonG.tab" -nln CS_CONDUITES
+ogr2ogr -f OCI OCI:agb/agb@qualif1 -lco launder=yes -progress "M:\VECTEURS\PSUD\Agriculture\Moisson\conversion_pour_integration\Moisson-20140428\Cuves_MoissonG.tab" -nln CS_CUVES
+ogr2ogr -f OCI OCI:agb/agb@qualif1 -lco launder=yes -progress "M:\VECTEURS\PSUD\Agriculture\Moisson\conversion_pour_integration\Moisson-20140428\Prises_d'eau_MoissonG.tab" -nln CS_PRISES_D_EAU
+ogr2ogr -f OCI OCI:agb/agb@qualif1 -lco launder=yes -progress "M:\VECTEURS\PSUD\Agriculture\Moisson\conversion_pour_integration\Moisson-20140428\Retenues_MoissonG.tab" -nln CS_RETENUES
+
+
+
+
+
+
+alter table "AGB"."CS_PARCELLES" rename column "FILI_RE_DE_PRODUCTION" to "FILIERE_DE_PRODUCTION";
+alter table "AGB"."CS_BARRIERES" rename column "LONGUEUR_ESTIM_E_M_TRE" to "LONGUEUR_ESTIMEE_METRE";
+ 
+alter table "AGB"."CS_CONDUITES" rename column "LONGUEUR_ESTIMEE_M_TRE" to "LONGUEUR_ESTIMEE_METRE";
+
+alter table "AGB"."CS_CUVES" rename column "CAPACITE_M3" to "CAPACITE_LITRE"; 
+ 
+alter table "AGB"."CS_BATIMENTS" rename column "SURFACE_ESTIMEE_M_" to "LONGUEUR_ESTIMEE_M2";
+alter table "AGB"."CS_BATIMENTS" rename column "TYPE_ENERGIE_UTILIS_E" to "TYPE_ENERGIE_UTILISEE";

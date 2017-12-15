@@ -1,0 +1,6 @@
+
+
+sqlplus MODPERFMTD/MODPERFMTD@SIGAPIC_PROD
+
+
+select identstf, auteur from vabfsigdat.batiment where auteur = 'vbl';

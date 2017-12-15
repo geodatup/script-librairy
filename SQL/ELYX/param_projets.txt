@@ -1,0 +1,40 @@
+
+1/ creer ce parametre 
+
+declare
+  s clob;
+begin
+s :='FLOWER';
+  insert into PSUDCAT.STCA_PARAM (PA_IDENT,PA_TYPE,PA_NAME,PA_FAMILY,PA_STATUS,PA_DATA,PA_DATE_CRE,PA_DATE_MOD)
+ select PSUDCAT.PARAM_SEQ_ID.NEXTVAL, 'APIC_FLOWER_OWNER','FLOWER',NULL, 'PUBLIC',s,CURRENT_DATE,CURRENT_DATE from DUAL ;
+  end;
+/
+
+
+
+
+2/ Rendre votre parametre public 
+
+INSERT INTO psudcat.STCA_RO_PA (RO_NAME,PA_IDENT) Values ( 'ADMIN' , < ici l'id du param rentre précedemment > );
+
+
+
+
+
+
+
+
+------ utile :
+
+select "PSUDCAT"."STCA_PARAM"."PA_IDENT", 
+    "PSUDCAT"."STCA_PARAM"."CTX_IDENT", 
+    "PSUDCAT"."STCA_PARAM"."PUB_IDENT", 
+    "PSUDCAT"."STCA_PARAM"."USR_LOGIN_NAME", 
+    "PSUDCAT"."STCA_PARAM"."PA_TYPE", 
+    "PSUDCAT"."STCA_PARAM"."PA_NAME", 
+    "PSUDCAT"."STCA_PARAM"."PA_FAMILY", 
+    "PSUDCAT"."STCA_PARAM"."PA_STATUS", 
+    "PSUDCAT"."STCA_PARAM"."PA_DATE_CRE", 
+    "PSUDCAT"."STCA_PARAM"."PA_DATE_MOD" 
+    from "PSUDCAT"."STCA_PARAM" 
+    order by PA_IDENT

@@ -1,0 +1,9 @@
+select GID, IDENTSTF, apic_cdate, apic_mdate from DPMDAT.face where  apic_cdate = apic_mdate;
+select GID, IDENTSTF, apic_cdate, apic_mdate from DPMDAT.PARCELLE where  apic_cdate = apic_mdate;
+select GID, IDENTSTF, apic_cdate, apic_mdate from DPMDAT.FMAR where  apic_cdate = apic_mdate;
+select GID, IDENTSTF, apic_cdate, apic_mdate from DPMDAT.FGDOM where  apic_cdate = apic_mdate;
+
+delete from DPMDAT.face where  apic_cdate = apic_mdate;
+delete from DPMDAT.parcelle where  apic_cdate = apic_mdate;
+delete from DPMDAT.FMAR where  apic_cdate = apic_mdate;
+delete from DPMDAT.FGDOM where  apic_cdate = apic_mdate;

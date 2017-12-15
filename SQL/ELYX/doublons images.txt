@@ -1,0 +1,112 @@
+
+------------------------------------------------------------
+# Tous les doublons
+
+select COUNT(*) AS NBR_DOUBLES, 
+    "PSUDDAT"."ORTHO_PSUD"."NOM", 
+    "PSUDDAT"."ORTHO_PSUD"."FICHIER"
+    from "PSUDDAT"."ORTHO_PSUD" 
+    group by NOM, FICHIER 
+    HAVING COUNT(*) > 1
+    ORDER BY NBR_DOUBLES desc;
+
+------------------------------------------------------------
+# Tous les doublons avec REPEORIG identiques
+
+select COUNT(*) AS NBR_DOUBLES, 
+    "PSUDDAT"."ORTHO_PSUD"."NOM", 
+    "PSUDDAT"."ORTHO_PSUD"."FICHIER", 
+    "PSUDDAT"."ORTHO_PSUD"."REPEORIG"
+    from "PSUDDAT"."ORTHO_PSUD" 
+    group by NOM, FICHIER, REPEORIG 
+    HAVING COUNT(*) > 1;
+
+------------------------------------------------------------
+# Tous les doublons avec différents REPEORIG (afin par exemple de choisir le plus récent)
+
+select NOM from (
+select COUNT(*) AS NBR_DOUBLES, 
+    "PSUDDAT"."ORTHO_PSUD"."NOM", 
+    "PSUDDAT"."ORTHO_PSUD"."FICHIER"
+    from "PSUDDAT"."ORTHO_PSUD" 
+    group by NOM, FICHIER 
+    HAVING COUNT(*) > 1
+    ORDER BY NBR_DOUBLES desc
+) 
+where NOM not in (
+select NOM from (
+select COUNT(*) AS NBR_DOUBLES, 
+    "PSUDDAT"."ORTHO_PSUD"."NOM", 
+    "PSUDDAT"."ORTHO_PSUD"."FICHIER", 
+    "PSUDDAT"."ORTHO_PSUD"."REPEORIG"
+    from "PSUDDAT"."ORTHO_PSUD" 
+    group by NOM, FICHIER, REPEORIG 
+    HAVING COUNT(*) > 1
+));
+
+------------------------------------------------------------
+# Suppression des doublons de même nom (on ne garde que le dernier anregistré)
+# Attention : il se peut que les doublons proviennent de sources différentes
+
+delete from "PSUDDAT"."ORTHO_PSUD" where GID not in (
+select max("PSUDDAT"."ORTHO_PSUD"."GID") 
+from "PSUDDAT"."ORTHO_PSUD" 
+where NOM in 
+(
+select "PSUDDAT"."ORTHO_PSUD"."NOM" 
+    from "PSUDDAT"."ORTHO_PSUD" 
+    group by NOM 
+    HAVING COUNT(*) > 1
+) 
+group by "PSUDDAT"."ORTHO_PSUD"."NOM"
+)
+
+------------------------------------------------------------
+# Suppression des doublons qui n'ont pas le REPEORIG le plus à jour
+
+delete from "PSUDDAT"."ORTHO_PSUD" where NOM in (
+select "PSUDDAT"."ORTHO_PSUD"."NOM" 
+    from "PSUDDAT"."ORTHO_PSUD" 
+    group by NOM, FICHIER 
+    HAVING COUNT(*) > 1
+) and REPEORIG not like '%Mixte%'
+
+------------------------------------------------------------
+select NOM, FICHIER, REPEORIG from "PSUDDAT"."ORTHO_PSUD" where GID = 656
+select NOM, FICHIER, REPEORIG from "PSUDDAT"."ORTHO_PSUD" where NOM like '328-295%'
+
+------------------------------------------------------------
+------------------------------------------------------------
+
+select COUNT(*) AS NBR_DOUBLES, 
+    "VABFSIGDAT"."ORTHO_DITTT_LT"."NOM", 
+    "VABFSIGDAT"."ORTHO_DITTT_LT"."FICHIER"
+    from "VABFSIGDAT"."ORTHO_DITTT_LT" 
+    group by NOM, FICHIER 
+    HAVING COUNT(*) > 1
+
+------------------------------------------------------------
+
+delete from "VABFSIGDAT"."ORTHO_DITTT_LT" where GID not in (
+select max("VABFSIGDAT"."ORTHO_DITTT_LT"."GID") 
+from "VABFSIGDAT"."ORTHO_DITTT_LT" 
+where NOM in 
+(
+select "VABFSIGDAT"."ORTHO_DITTT_LT"."NOM" 
+    from "VABFSIGDAT"."ORTHO_DITTT_LT" 
+    group by NOM 
+    HAVING COUNT(*) > 1
+) 
+group by "VABFSIGDAT"."ORTHO_DITTT_LT"."NOM"
+)
+
+------------------------------------------------------------
+
+delete from "VABFSIGDAT"."ORTHO_DITTT" where GID <= 244
+
+------------------------------------------------------------
+
+select * from "VABFSIGDAT"."ORTHO_DITTT";
+
+------------------------------------------------------------
+

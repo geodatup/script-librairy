@@ -1,0 +1,6 @@
+CARTo 2000
+
+dir /b c:\temp_mosa\2000\heterogen_band\*.tif>"Carto2000_heterogen.txt"
+set DATA_DIR=c:\temp_mosa\2000\heterogen_band
+for /f %a IN (Carto2000_heterogen.txt) do gdal_translate -of GTiff -expand rgb -co "COMPRESS=LZW" -co "TFW=YES" %DATA_DIR%\%a c:\temp_mosa\2000\heterogen_band_rep\%a
+

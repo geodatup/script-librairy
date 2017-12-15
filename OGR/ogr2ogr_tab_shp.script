@@ -1,0 +1,1 @@
+ogr2ogr -f "ESRI Shapefile" shp_agric\Cuves_Moisson2.shp Cuves_Moisson2.tab

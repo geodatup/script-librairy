@@ -1,0 +1,5 @@
+SHOM
+
+gdalbuildvrt -resolution lowest -allow_projection_difference -vrtnodata "200 0 0" Shom_GE.vrt H:\GEODATA\EXTERNE-PSUD\GEORASTER\Cartes_marines\60k\*.tif
+
+

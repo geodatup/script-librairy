@@ -1,0 +1,12 @@
+SELECT table_name FROM dba_tables where owner = 'PSUDDAT' and table_name not like 'APIC_%' and table_name not like 'MDRT_%' and table_name not like '%_AR%' and table_name not like '%_AUX%' and table_name='PARCELLE' order by table_name 
+
+
+SELECT view_name FROM dba_views where owner = 'PSUDDAT' and view_name not like '%_AR' and view_name not like '%_BASE' and view_name not like '%_MW' and view_name not like '%_CONS' and view_name not like '%_PKDB' and view_name not like '%_PKD%' and view_name not like '%_DIFF' and view_name not like '%_LOCK' and view_name not like '%_BPKC' and view_name not like '%_PKC' and view_name not like '%_CONF' and view_name not like 'APIC%' order by view_name
+
+
+
+
+
+SELECT TABLE_name FROM dba_tables where owner = 'PSUDDAT' and table_name = 'COMMUNE'
+
+SELECT view_name FROM dba_views where owner = 'PSUDDAT' and view_name = 'SOMPAR'

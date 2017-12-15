@@ -1,0 +1,16 @@
+--SELECTIONNER TOUs SYMBOL
+select * from PSUDCAT.STCA_PARAM where PA_TYPE like 'APIC_SYM%';
+
+-- SUPPRESSION DE SYMBOL
+select * from PSUDCAT.stca_param where pa_ident = '7493';
+select * from PSUDCAT.stca_param where PA_DATE_CRE > '05/12/12';
+select * from PSUDCAT.STCA_PARAM where PA_TYPE = 'APIC_SYM_POLYMARKER' and PA_NAME = 'HML_BARCORAI' and PA_FAMILY  is NULL and PA_STATUS = 'PUBLIC';
+select * from PSUDCAT.STCA_PARAM where PA_TYPE = 'APIC_SYM_MARKER' and PA_NAME = 'HML_BARCORAI' and PA_FAMILY  is NULL and PA_STATUS = 'PUBLIC';
+delete from PSUDCAT.STCA_PARAM cascade where PA_TYPE = 'APIC_SYM_POLYMARKER' and PA_NAME = 'HML_BARCORAIL_L' and PA_FAMILY  is NULL and PA_STATUS = 'PUBLIC';
+delete from PSUDCAT.STCA_PARAM cascade where PA_TYPE = 'APIC_SYM_MARKER' and PA_NAME = 'HML_BARCORAI' and PA_FAMILY  is NULL and PA_STATUS = 'PUBLIC';
+
+delete from PSUDCAT.stca_ro_pa where pa_ident = '7514';
+delete PSUDCAT.stca_ro_pa where pa_ident = '6511' OR pa_ident = '6512';
+
+select * from PSUDCAT.STCA_etat_role where pa_ident = '7514';
+select * from PSUDCAT.STCA_etat_user where pa_ident = '7514';

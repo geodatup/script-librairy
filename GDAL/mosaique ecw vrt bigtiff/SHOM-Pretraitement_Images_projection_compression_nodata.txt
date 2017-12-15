@@ -1,0 +1,5 @@
+SHOM
+
+dir /b H:\GEODATA\EXTERNE-PSUD\GEORASTER\Cartes_marines\SHOM_2011_assemblage\*.tif>"Shom.txt"
+set DATA_DIR=H:\GEODATA\EXTERNE-PSUD\GEORASTER\Cartes_marines\SHOM_2011_assemblage
+for /f %a IN (Shom.txt) do gdal_translate -of GTiff -mo SOURCE=Shom -co "COMPRESS=LZW" -co "TFW=YES" %DATA_DIR%\%a H:\GEODATA\EXTERNE-PSUD\GEORASTER\Cartes_marines\SHOM_2011_Lzw\%a

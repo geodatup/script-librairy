@@ -1,0 +1,10 @@
+ogr2ogr -f SHAPE out ilot.shp -lco GEOMETRY=AS_WKT
+
+ogr2ogr -f CSV output.csv D:\ilots.shp -lco GEOMETRY=AS_WKT
+
+ogr2ogr -f CSV D:\output.csv M:\VECTEURS\PSUD\ENVIRONNEMENT\RESERVES_2014\livré\LimitesAiresProtegees2014.shp -lco GEOMETRY=AS_WKT -lco SEPARATOR=SEMICOLON
+
+ogr2ogr -f CSV D:\out.csv M:\VECTEURS\BSIG\e-admin\integration\EAD_Ecole.shp -lco GEOMETRY=AS_WKT
+
+ogr2ogr -f CSV D:\Bassin_sco_out.csv M:\VECTEURS\PSUD\Enseignement\BASSIN_SCOLAIRE.shp -lco GEOMETRY=AS_WKT
+

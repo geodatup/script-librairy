@@ -1,0 +1,22 @@
+# connection DB
+
+sudo -i -u postgres
+psql
+
+#reprojection postgis des données OSM
+
+
+ALTER TABLE planet_osm_point 
+ALTER COLUMN way 
+TYPE Geometry(Point, 4326) 
+USING ST_Transform(way, 4326);
+
+ALTER TABLE planet_osm_polygon
+ALTER COLUMN way 
+TYPE Geometry(POLYGON, 4326) 
+USING ST_Transform(way, 4326);
+
+ALTER TABLE planet_osm_line
+ALTER COLUMN way 
+TYPE Geometry(LINE, 4326) 
+USING ST_Transform(way, 4326);   

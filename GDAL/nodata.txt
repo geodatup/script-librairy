@@ -1,0 +1,5 @@
+gdal_translate -of GTiff -a_srs EPSG:3163 -a_nodata "255 255 255" -mo SOURCE=IRD1975 -co "COMPRESS=LZW" -co "TFW=YES" V:\DDR\Aptitudes_Culturales_Sols\aptitudes_culturales_IRD.tif  c:\temp_mosa\aptitude_nodata.tif 
+
+gdal_translate -of GTiff -a_srs EPSG:3163 -a_nodata "255 255 255" -mo SOURCE=IRD1975 -co "COMPRESS=LZW" -co "TFW=YES" V:\DDR\Isohyètes_1991-2000\isohyetes_geo.tif  c:\temp_mosa\isohyetes_nodata.tif 
+
+gdal_translate -of GTiff -a_srs EPSG:3163 -a_nodata "255 255 255" -mo SOURCE=IRD1975 -co "COMPRESS=LZW" -co "TFW=YES" V:\DDR\Paysages_Morpho_pedo\pedo_geo900.tif  c:\temp_mosa\pedo_nodata.tif 

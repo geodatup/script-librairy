@@ -1,0 +1,1 @@
+gdalwarp -s_srs EPSG:4326 -t_srs EPSG:3163 -of GTIff -co "COMPRESS=LZW" -co "TFW=YES" H:\GEODATA\EXTERNE-PSUD\GEORASTER\MNT\ombrenc_srtm.ascii ombrageNC.tif

@@ -1,0 +1,12 @@
+ogr2ogr -f OCI -update OCI:sides/sides@SIDES B.shp
+
+
+ogr2ogr -update -append -progress -f OCI OCI:sig/sig@cartoq c:/temp_mosa/to_oracle.shp
+
+
+
+ogrinfo -ro OCI:sig/sig@cartoq -sql "SELECT * from Test_qgis"
+
+
+ogr2ogr -update -progress -f OCI OCI:sig/sig@cartoq -nlt 
+

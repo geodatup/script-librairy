@@ -1,0 +1,1 @@
+Select a.dis09, b.centroide, SDO_GEOM.SDO_INTERSECTION(a.shape, b.shape, 0.5) from isee_geom a, parcelle b

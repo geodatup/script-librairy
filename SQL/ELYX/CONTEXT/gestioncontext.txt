@@ -1,0 +1,16 @@
+
+select * from psudcat.stca_param where pa_type='APIC_CTX_CONTEXT';
+update PSUDCAT.STCA_PUBLICATION set PUB_STATUS='PUBLISHED' where PUB_STATUS='IN_PROGRESS' and PUB_IDENT=(select PUB_IDENT from PSUDCAT.STCA_PARAM where PA_NAME='bd_topo' and PA_IDENT=7441);
+update PSUDCAT.STCA_PUBLICATION set PUB_STATUS='PUBLISHED' where PUB_STATUS='WAITING' and PUB_IDENT=(select PUB_IDENT from PSUDCAT.STCA_PARAM where PA_NAME='bd_topo' and PA_IDENT=7441);
+
+select PUB_IDENT from PSUDCAT.STCA_PARAM where PA_NAME='test param ' and PA_IDENT=12843;
+select PUB_IDENT from PSUDCAT.STCA_PARAM where PA_NAME='HYM_MER_L' and PA_IDENT=7899;
+select PUB_IDENT from PSUDCAT.STCA_PARAM where PA_NAME='Publication SYMBOL 2' and PA_IDENT=6428;
+select PUB_IDENT from PSUDCAT.STCA_PARAM where PA_NAME='bd_topo' and PA_IDENT=7441;
+
+select * from PSUDCAT.STCA_PUBLICATION where PUB_IDENT='341';
+
+select * from PSUDCAT.STCA_PARAM where ctx_IDENT ='12843';
+
+select * from PSUDCAT.STCA_ETAT_USER where ctx_IDENT ='12843';
+delete from PSUDCAT.STCA_ETAT_USER where ctx_IDENT ='12843';

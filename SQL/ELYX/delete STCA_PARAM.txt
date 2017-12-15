@@ -1,0 +1,28 @@
+delete
+from psudcat.stca_etat_user
+where user_name in
+  (select seu.user_name
+  from psudcat.stca_etat_user seu,
+    psudcat.stca_param sp
+  where seu.pa_ident   =sp.pa_ident
+  and sp.usr_login_name='SIGADM'
+  )
+and ctx_ident in
+  (select seu.ctx_ident
+  from psudcat.stca_etat_user seu,
+    psudcat.stca_param sp
+  where seu.pa_ident   =sp.pa_ident
+  and sp.usr_login_name='SIGADM'
+  )
+and pa_ident in
+  (select seu.pa_ident
+  from psudcat.stca_etat_user seu,
+    psudcat.stca_param sp
+  where seu.pa_ident   =sp.pa_ident
+  and sp.usr_login_name='SIGADM'
+  );
+
+
+
+
+delete from psudcat.STCA_PARAM where PA_TYPE like 'APIC_VIS_OBJECT_STYLE' and usr_login_name='SIGADM';

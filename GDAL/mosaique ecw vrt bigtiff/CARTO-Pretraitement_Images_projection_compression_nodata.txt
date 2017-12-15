@@ -1,0 +1,6 @@
+CARTo 100
+
+dir /b A:\RASTERS\RASTER_CARTO\carto_100\*.tif>"Carto100.txt"
+set DATA_DIR=A:\RASTERS\RASTER_CARTO\carto_100
+for /f %a IN (Carto100.txt) do gdal_translate -of GTiff -co "COMPRESS=LZW" -co "TFW=YES" %DATA_DIR%\%a A:\RASTERS\RASTER_CARTO\carto_100_LZW\%a
+

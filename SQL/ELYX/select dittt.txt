@@ -1,0 +1,2 @@
+select distinct apic_cdate, apic_mdate from psuddat.batiment where auteur = 'DITTT' and obs = 'BDTOPO 2009' and domaine like '%10000%'
+select distinct apic_cdate, apic_mdate from psuddat.batiment where auteur != 'DITTT'

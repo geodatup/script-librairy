@@ -1,0 +1,34 @@
+Dans les fichiers .csv issus d'Ascodes, remplacer à l'aide d'un éditeur de texte :
+
+BOULOUPARIS;	par 	BLP_INFRA_
+BOURAIL;	par	BRL_INFRA_
+CANALA;		par 
+DUMBEA;		par	DUM_INFRA_
+FARINO;		par 
+HIENGHENE;	par 
+HOUAILOU;	par	BRL_INFRA_
+ILE DES PINS;	par	IDP_INFRA_
+KAALAGOMEN;	par 
+KONE;		par 
+KOUAOUA;	par 
+KOUMAC;		par 
+LA FOA;		par	FOA_INFRA_
+LIFOU;		par
+MARE;		par
+MOINDOU;	par	MND_INFRA_
+MONT-DORE;	par	MTD_INFRA_
+NOUMEA;		par	NEA_INFRA_
+OUEGOA;		par
+OUVEA;		par
+PAITA;		par	PTA_INFRA_
+POINDIMIE;	par
+PONERIHOUEN;	par
+POUEBO;		par
+POUEMBOUT;	par
+POUM;		par
+POYA;		par	BRL_INFRA_
+SARRAMEA;	par	FOA_INFRA_
+THIO;		par	TIO_INFRA_
+TOUHO;		par
+VOH;		par
+YATE;		par	YTE_INFRA_

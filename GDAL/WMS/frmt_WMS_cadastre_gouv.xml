@@ -1,0 +1,14 @@
+<GDAL_WMS>
+    <Service name="WMS">
+	<ServerUrl>http://onmoon.jpl.nasa.gov/wms.cgi?</ServerUrl>
+	<Layers>CDIF:SECTION,CDIF:COMMUNE</Layers>
+    </Service>
+    <DataWindow>
+	<UpperLeftX>620299.26</UpperLeftX>
+	<UpperLeftY>2237577.86</UpperLeftY>
+	<LowerRightX>1630350.67</LowerRightX>
+	<LowerRightY>2244703.43</LowerRightY>
+	<SizeX>2666666</SizeX>
+	<SizeY>1333333</SizeY>
+	</DataWindow>
+</GDAL_WMS>

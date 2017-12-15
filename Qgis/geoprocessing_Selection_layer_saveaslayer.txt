@@ -1,0 +1,49 @@
+layer = iface.activeLayer()
+layer.name()
+feature = layer.getFeatures().next()
+layer.setSelectedFeatures([feature.id()])
+
+feature = layer.getFeatures().next()
+layer.setSelectedFeatures([feature.id()])
+#zoom to selected 
+iface.actionZoomToSelected().trigger()
+#deselection
+layer.deselect([feature.id()])
+iface.mapCanvas().saveAsImage(u'C:/Users/Yogis/Documents/Project_maps/PSG_Rouyre/Data/cartes_ign/atlas_cadastre/file.png')
+
+----
+workdir = '/Users/R/Desktop/Rouyre/Raster/IGN/imagerie'
+def saveImg():
+  iface.mapCanvas().saveAsImage(imgname)
+  print imgname 
+
+layer = iface.activeLayer()
+for i in range(8):  
+  layer.select(i)
+  iface.actionZoomToSelected().trigger()
+  qgis.utils.iface.mapCanvas().zoomScale(1000)
+  layer.deselect(i)
+  imgname = u'_'.join([workdir,'object',str(i)])
+  imgname = ''.join([imgname,'.png'])  
+  iface.mapCanvas().mapCanvasRefreshed.connect(saveImg)
+  #iface.mapCanvas().mapCanvasRefreshed.disconnect(saveImg)
+
+---
+layer = iface.activeLayer()
+
+def zoomToselect():
+  iface.actionZoomToSelected().trigger()
+  #if selected DO
+  qgis.utils.iface.mapCanvas().zoomScale(1000)
+
+
+
+iface.mapCanvas().mapCanvasRefreshed.connect(zoomToselect)
+
+  iface.mapCanvas().mapCanvasRefreshed.disconnect(zoomToselect)
+
+for i in range(8):
+  layer.select([]) 
+  layer.select(i)
+  iface.mapCanvas().mapCanvasRefreshed.connect(zoomToselect)
+  iface.mapCanvas().mapCanvasRefreshed.disconnect(zoomToselect)

@@ -1,0 +1,16 @@
+
+
+
+# Trouve l'id de mon contexte
+
+Select PA_IDENT, PA_NAME from psudcat.STCA_PARAM where PA_TYPE like 'APIC_CTX_CONTEXT' and PA_NAME like 'Tests unitaires' and USR_LOGIN_NAME like 'BLANDIN';
+
+
+
+
+
+# Trouve mes représentations
+
+Select * from psudcat.STCA_PARAM WHERE USR_LOGIN_NAME like 'BLANDIN' AND PA_TYPE like 'APIC_VIS_OBJECT_STYLE';
+
+Select DISTINCT USR_LOGIN_NAME from psudcat.STCA_PARAM WHERE PA_TYPE like 'APIC_VIS_OBJECT_STYLE';

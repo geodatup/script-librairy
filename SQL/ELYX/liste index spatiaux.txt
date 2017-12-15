@@ -1,0 +1,6 @@
+
+# Liste tous les index spatiaux
+select INDEX_NAME from USER_SDO_INDEX_INFO;
+
+# Supprime l'index spatial de la table PARCELLE
+DROP INDEX Q_PARCELLE;

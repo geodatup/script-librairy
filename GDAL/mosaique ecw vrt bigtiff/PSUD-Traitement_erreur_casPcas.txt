@@ -1,0 +1,48 @@
+gdalbuildvrt -resolution lowest -allow_projection_difference -srcnodata "255 255 255" Mosa_2007_5dm_lzw.vrt H:/GEODATA/EXTERNE-PSUD/GEORASTER/ortho-photo/DITTT/2007_5dm_lzw/*.tif
+gdal_translate -of ECW -co "LARGE_OK=YES" Mosa_2007_5dm_lzw.vrt Mosa_2007_5dm_lzw.ecw
+->EN COURS
+
+gdalbuildvrt -resolution lowest -allow_projection_difference -srcnodata "255 255 255" Mosa_2008_50cm.vrt H:/GEODATA/INTERNE-PSUD/GEORASTER/PSUD/Ortho-photos/2008_50cm/*.tif 
+gdal_translate -of ECW -co "LARGE_OK=YES" Mosa_2008_50cm.vrt Mosa_2008_50cm.ecw
+->EN COURS
+
+
+gdalbuildvrt -resolution lowest -allow_projection_difference -srcnodata "255 255 255" Mosa_lafoa_2007.vrt H:/GEODATA/INTERNE-PSUD/GEORASTER/PSUD/Ortho-photos/lafoa_2007/*.tif
+gdal_translate -of ECW -co "LARGE_OK=YES" Mosa_lafoa_2007.vrt Mosa_lafoa_2007.ecw
+->EN COURS
+
+ 
+gdalbuildvrt -resolution lowest -allow_projection_difference -srcnodata "255 255 255" Mosa_2008_5dm_lzw.vrt H:/GEODATA/EXTERNE-PSUD/GEORASTER/ortho-photo/DITTT/2008_5dm_lzw/*.tif 
+gdal_translate -of ECW -co "LARGE_OK=YES" Mosa_2008_5dm_lzw.vrt Mosa_2008_5dm_lzw.ecw
+->EN COURS
+
+
+gdalbuildvrt -resolution lowest -allow_projection_difference -srcnodata "255 255 255" Mosa_2008_25cm.vrt H:/GEODATA/EXTERNE-PSUD/GEORASTER/ortho-photo/SERAIL/2008_25cm/*.tif 
+gdal_translate -of ECW -co "LARGE_OK=YES" Mosa_2008_25cm.vrt Mosa_2008_25cm.ecw
+->EN COURS
+
+
+gdalbuildvrt -resolution lowest -allow_projection_difference -srcnodata "255 255 255" Mosa_2008_50cm.vrt H:/GEODATA/EXTERNE-PSUD/GEORASTER/ortho-photo/SERAIL/2008_50cm/*.tif 
+
+gdal_translate -of ECW -co "LARGE_OK=YES" Mosa_2008_50cm.vrt Mosa_2008_50cm.ecw
+-> ERROR 2 : impossible d'ouvrir le fichier (!)
+
+Du coup :
+gdal_translate -of GTiff Mosa_2008_50cm.vrt Mosa_2008_50cm.tif
+-> EN COURS
+
+
+gdalbuildvrt -resolution lowest -allow_projection_difference -srcnodata "255 255 255" Mosa_2009_50cm.vrt H:/GEODATA/EXTERNE-PSUD/GEORASTER/ortho-photo/SERAIL/2009_50cm/*.tif 
+gdal_translate -of ECW -co "LARGE_OK=YES"Mosa_2009_50cm.vrt Mosa_2009_50cm.ecw
+
+gdalbuildvrt -resolution lowest -allow_projection_difference -srcnodata "255 255 255" Mosa_2009_25cm.vrt H:/GEODATA/EXTERNE-PSUD/GEORASTER/ortho-photo/SERAIL/2009_25cm/*.tif 
+gdal_translate -of ECW -co "LARGE_OK=YES" Mosa_2009_25cm.vrt Mosa_2009_25cm.ecw
+
+gdalbuildvrt -resolution lowest -allow_projection_difference -srcnodata "255 255 255" Mosa_2010_50cm.vrt H:/GEODATA/INTERNE-PSUD/GEORASTER/PSUD/Ortho-photos/2010_50cm/*.tif 
+gdal_translate -of ECW -co "LARGE_OK=YES" Mosa_2010_50cm.vrt Mosa_2010_50cm.ecw
+
+gdalbuildvrt -resolution lowest -allow_projection_difference -srcnodata "255 255 255" Mosa_2010_50cm.vrt H:/GEODATA/EXTERNE-PSUD/GEORASTER/ortho-photo/SERAIL/2010_50cm/*.tif 
+gdal_translate -of ECW -co "LARGE_OK=YES"Mosa_2010_50cm.vrt Mosa_2010_50cm.ecw
+
+gdalbuildvrt -resolution lowest -allow_projection_difference -srcnodata "255 255 255" Mosa_2011_50cm.vrt H:/GEODATA/INTERNE-PSUD/GEORASTER/PSUD/Ortho-photos/2011_50cm/*.tif
+gdal_translate -of ECW -co "LARGE_OK=YES" Mosa_2011_50cm.vrt Mosa_2011_50cm.ecw

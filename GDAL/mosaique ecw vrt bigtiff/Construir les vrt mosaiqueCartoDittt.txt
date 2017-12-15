@@ -1,0 +1,11 @@
+
+gdalbuildvrt -resolution lowest -allow_projection_difference -srcnodata "255 255 255" C:\temp_mosa\Carto_10.vrt A:\RASTERS\RASTER_CARTO\Carto_10_LZW\*.tif
+
+gdalbuildvrt -resolution lowest -allow_projection_difference -srcnodata "255 255 255" C:\temp_mosa\Carto_100.vrt A:\RASTERS\RASTER_CARTO\Carto_100_LZW\*.tif
+
+gdalbuildvrt -resolution lowest -allow_projection_difference -srcnodata "255 255 255" C:\temp_mosa\Carto_50.vrt A:\RASTERS\RASTER_CARTO\Carto_50_LZW\*.tif
+
+
+
+gdalbuildvrt -resolution lowest -allow_projection_difference -srcnodata "255 255 255" C:\temp_mosa\RasterCarto12_10.vrt A:\RASTERS\RASTER_CARTO\2012_BDRASTER_10_LZW\*.tif
+gdalbuildvrt -resolution lowest -allow_projection_difference -srcnodata "255 255 255" C:\temp_mosa\RasterCarto12_50.vrt A:\RASTERS\RASTER_CARTO\2012_BDRASTER_50_LZW\*.tif

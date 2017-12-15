@@ -1,0 +1,6 @@
+
+SELECT * FROM `field_data_field_geoshape` WHERE `field_geoshape_geo_type` = 'linstring'
+SELECT * FROM `field_data_field_geoshape` WHERE `field_geoshape_geo_type` = 'polygon' OR `field_geoshape_geo_type` = 'multipolygon'
+
+
+SELECT * FROM `field_data_field_geolocation` WHERE `field_geolocation_geo_type` = 'point'
