@@ -1,0 +1,12 @@
+#SQL
+
+select distinct amenity from planet_osm_point where amenity is not null;
+
+
+select way from planet_osm_point where amenity = 'bar';
+
+# different tourisme POI 
+select distinct tourism from planet_osm_point where tourism is not null;
+
+
+select way from planet_osm_point where tourism = 'guest house';

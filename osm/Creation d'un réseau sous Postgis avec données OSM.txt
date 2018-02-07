@@ -1,0 +1,46 @@
+# Création d'une base de données réseau sous Postgis
+
+Installer osm2pgrouting
+'''
+sudo apt-get osm2pgrouting
+'''
+
+Creer la base et les extentions GIS
+
+psql
+CREATE DATABASE osmnetdb;
+#[CTRL + D to exit]
+psql -d osmnetdb -c 'create extension postgis'
+psql -d osmnetdb -c 'create extension pgrouting'
+
+
+createdb -U user pgrouting-workshop
+psql -U user -d pgrouting-workshop -c "CREATE EXTENSION postgis;"
+psql -U user -d pgrouting-workshop -c "CREATE EXTENSION pgrouting;"
+
+
+Verifier la version de pgrouting dans osmnetdb
+''' 
+psql
+\connect osmnetdb;
+SELECT pgr_version();
+'''
+
+
+
+Télécharger les données OSM
+'''
+# Download using Overpass XAPI (larger extracts possible than with default OSM API)
+# Définir une BBOX 
+BBOX="-122.8,45.4,-122.5,45.6"
+wget --progress=dot:mega -O "sampledata.osm" "http://www.overpass-api.de/api/xapi?*[bbox=${BBOX}][@meta]"
+'''
+
+
+Importer les données OSM
+
+'''
+
+osm2pgsql -G -U osm -d hdm /home/yogis/Téléchargements/thailand-latest.osm.pbf -S /usr/share/osm2pgsql/default.style --hstore --create
+
+'''

@@ -1,0 +1,26 @@
+# faire des données OSM routable avec OSM2PO
+
+set GISDATA_DIR=C:\Users\Yogis\Documents\GIS_DataBase\OSM-and-OBF\OSM\region_france
+
+## Conversion de tous les fichiers osm
+java -jar osm2po-core-5.0.0-SR1.jar cmd=c prefix=li %GISDATA_DIR%\limousin-latest.osm.pbf
+
+java -jar osm2po-core-5.0.0-SR1.jar cmd=c prefix=c %GISDATA_DIR%\centre-latest.osm.pbf
+
+java -jar osm2po-core-5.0.0-SR1.jar cmd=c prefix=p %GISDATA_DIR%\poitou-charentes-latest.osm.pbf
+
+java -jar osm2po-core-5.0.0-SR1.jar cmd=c prefix=lo %GISDATA_DIR%\pays-de-la-loire-latest.osm.pbf
+
+
+## fusion de tous les fichiers osm dans un seul dossier
+java -jar osm2po-core-5.0.0-SR1.jar cmd=m prefix=lilopc li p c lo
+
+
+## Création du fichier SQL à importer dans POSTGIS
+java -jar osm2po-core-5.0.0-SR1.jar cmd=sp prefix=lilopc
+
+
+
+## Inserer les données dans PGSQL
+Connecter au serveur DB 
+psql -U postgres -d osmdb -q -f "/media/MediasPartages/OSM-and-OBF/network/lilopc_2po_4pgr.sql"
